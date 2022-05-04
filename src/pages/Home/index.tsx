@@ -25,10 +25,8 @@ export const Home = () => {
     pokedex();
   }, [pagination]);
 
-  const nextPrevius = () => {
-    setPagination(pagination + 9);
-    setPage(page + 1)
-  };
+  // const nextPrevius = () => {
+  // };
 
   return (
     <HomeStyled>

@@ -19,8 +19,8 @@ export const PokeCardStyled = styled.div`
     font-size: 23px;
     border: 2px solid;
     border-radius: 5px;
-    border-color: ${colors.BLACK};
-    box-shadow: 0px 4px 4px 0px ${colors.BLACK};
+    border-color: ${colors.LIGHT_BLACK};
+    box-shadow: 0px 4px 4px 0px ${colors.LIGHT_BLACK};
   }
 
   &.grass {
@@ -92,8 +92,8 @@ export const TypeStyled = styled.div`
 
   border: 1px solid;
   border-radius: 6px;
-  border-color: ${colors.BLACK};
-  box-shadow: 0px 4px 4px 0px ${colors.BLACK};
+  border-color: ${colors.LIGHT_BLACK};
+  box-shadow: 0px 4px 4px 0px ${colors.LIGHT_BLACK};
 
   background-color: ${colors.LIGHT_GRAY};
 `;

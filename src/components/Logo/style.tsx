@@ -7,7 +7,7 @@ export const LogoContainerStyled = styled.div`
   margin-bottom: 1em;
 
   img.imgLogo {
-    width: 25%;
-    height: 25%;
+    width: 20%;
+    height: 20%;
   }
 `;

@@ -15,4 +15,6 @@ export const ICE = "#98D8D8"
 export const DRAGON = "#7038F8"
 
 export const LIGHT_GRAY = "#EEEEEE";
-export const BLACK = "#00000040"
+export const LIGHT_BLACK = "#00000040"
+export const BLACK = "#130d089d"
+export const RED = "#e01a1a"

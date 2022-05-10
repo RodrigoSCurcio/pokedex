@@ -5,6 +5,5 @@ export const FooterContainerStyled = styled.div`
   align-items: center;
   justify-content: center;
   color: #FFF;
-
-  margin-bottom: 0;
+  padding-bottom: 10px;
 `;

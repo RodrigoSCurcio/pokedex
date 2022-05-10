@@ -1,4 +1,4 @@
-import logo from "../../static/img/Gorilla.png";
+import logo from "../../static/img/Pokemon.png";
 import { LogoContainerStyled } from "./style";
 
 export const Logo = () => {

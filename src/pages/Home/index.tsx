@@ -1,47 +1,73 @@
 import { useEffect, useState } from "react";
+import { Pagination } from "../../components";
 import { PokeDexInterface } from "../../interfaces/pokesInterface";
 import { getFirstGeneration } from "../../services/pokemons";
 import { PokeCard } from "./components";
 import { HomeStyled } from "./style";
-import Pagination from "@mui/material/Pagination";
+import gifLoading from "../../static/img/loading.gif";
 
 export const Home = () => {
   const [pokemons, setPokemons] = useState<PokeDexInterface>();
-  const [pagination, setPagination] = useState<number>(0);
-  const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
-  console.log(pokemons);
+  const [count, setCount] = useState<number>();
+  const [next, setNext] = useState<string>();
+  const [previous, setPrevious] = useState<string | null>(null);
+  const [page, setPage] = useState(0);
+  const [offset, setOffset] = useState<number>(0);
 
   useEffect(() => {
     const pokedex = async () => {
-      const response = await getFirstGeneration({ pagination: pagination });
+      const response = await getFirstGeneration({ offset });
       if (response && response.status === 200) {
         setPokemons(response.data);
+        setCount(response.data.count);
+        setNext(response.data.next);
+        setPrevious(response.data.previous);
+        setPage(0);
+        setLoading(false);
       } else {
         setError(true);
+        setLoading(false);
       }
     };
     pokedex();
-  }, [pagination]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  // const nextPrevius = () => {
-  // };
+  const Offset = async (direction: string) => {
+    setLoading(true);
+    const response = await getFirstGeneration({
+      offset: direction === "foward" ? offset + 9 : offset - 9,
+    });
+    if (response && response.status === 200) {
+      setPokemons(response.data);
+      setPage(direction === "foward" ? page + 1 : page - 1);
+      setNext(response.data.next);
+      setPrevious(response.data.previous);
+      setOffset(direction === "foward" ? offset + 9 : offset - 9);
+      setLoading(false);
+    }
+  };
 
   return (
     <HomeStyled>
-      {error && "Erro ao buscar dados na pokedex"}
-      {pokemons && (
+      {loading && (
+        <div className="loading col-12">
+          <img src={gifLoading} alt="gifLoading" />
+        </div>
+      )}
+      {error && !loading && "Erro ao buscar dados na pokedex"}
+      {!loading && pokemons && count && (
         <div className="card row">
-          {/* <Pagination
-            className="d-flex justify-content-center mb-2"
-            count={pokemons.count}
-            size="large"
-            variant="outlined"
-            shape="rounded"
+          <Pagination
+            Offset={Offset}
+            previous={previous!}
+            count={count}
+            next={next}
             page={page}
-            onChange={nextPrevius}
-          /> */}
+          />
           {pokemons.results.map((poke) => {
             return <PokeCard pokemon={poke} />;
           })}

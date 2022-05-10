@@ -1,5 +1,5 @@
 import { FooterContainerStyled } from "./style";
 
 export const Footer = () => {
-  return <FooterContainerStyled>Footer</FooterContainerStyled>;
+  return <FooterContainerStyled>@rckcurcio</FooterContainerStyled>;
 };
